@@ -1,1 +1,24 @@
 GET http://localhost:3000/users
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Juan",
+    "password": "12345"
+}
+
+###
+
+DELETE http://localhost:3000/users/Juan
+
+###
+
+PATCH http://localhost:3000/users/Juan
+Content-Type: application/json
+
+{
+    "name": "Pedro"
+}

@@ -1,8 +1,11 @@
 import express from 'express';
-import { configureRouter } from './Infraestructura/router.js';
+import { configureRouter } from './api/router.js';
+import './dependencies.js';
 
 const app = express();
 const PORT = 3000;
+
+app.use(express.json()); //decodificame los json
 
 configureRouter(app);
 
