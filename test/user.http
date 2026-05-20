@@ -6,8 +6,10 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "name": "Juan",
-    "password": "12345"
+    "username": "Juan",
+    "password": "12345",
+    "displayName": "Juan Pérez",
+    "email": "juan@gmail.com"
 }
 
 ###

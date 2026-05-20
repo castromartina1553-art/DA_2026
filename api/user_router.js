@@ -4,13 +4,18 @@ export function configureUserRouter(router) {
     const UserService = getDependency('userService');
 
     console.log('Configurando rutas de usuario');
-    router.get('/users', (req, res) => {
-        const users = UserService.getList();
-        res.json(users.map(user => ({ name: user.name})));
+    router.get('/users', async (req, res) => {
+        const users = await UserService.getList();
+        res.json(users.map(user => ({ 
+            username: user.username,
+            displayName: user.displayName,
+            email: user.email,
+            role: user.role
+        })));
     });
-    router.post('/users', (req, res) => {
+    router.post('/users', async (req, res) => {
         const user = req.body;
-        const newUser = UserService.add(user);
+        const newUser = await UserService.add(user);
         res.json({ newUser });
     });
     router.delete('/users/:name', (req, res) => {
@@ -25,3 +30,5 @@ export function configureUserRouter(router) {
         res.json({ message: 'Usuario actualizado' });
     });
 }
+//funciones asincronicas
+//instalar libreria
