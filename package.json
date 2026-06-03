@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/castromartina1553-art/DA_2026#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.2.1",
     "mongoose": "^9.6.2"
   },

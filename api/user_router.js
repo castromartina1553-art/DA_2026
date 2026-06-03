@@ -1,10 +1,11 @@
 import { getDependency } from "../dependency.js";
+import checkRoleMiddleware from "../middlewares/check_role_middleware.js";
 
 export function configureUserRouter(router) {
     const UserService = getDependency('userService');
 
     console.log('Configurando rutas de usuario');
-    router.get('/users', async (req, res) => {
+    router.get('/users', checkRoleMiddleware (['admin']), async (req, res) => {
         const users = await UserService.getList();
         res.json(users.map(user => ({ 
             username: user.username,
@@ -13,8 +14,8 @@ export function configureUserRouter(router) {
             role: user.role
         })));
     });
-    router.post('/users', async (req, res) => {
-        const user = req.body;
+    router.post('/users', async (req, res) => { //agregar middlware check
+        const user = req.body; 
         const newUser = await UserService.add(user);
         res.json({ newUser });
     });
@@ -32,3 +33,4 @@ export function configureUserRouter(router) {
 }
 //funciones asincronicas
 //instalar libreria
+//despues de receso traer una nueva identidad rutas, servicio y repositorio 

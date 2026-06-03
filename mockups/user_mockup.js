@@ -7,12 +7,12 @@ export class UserMockup {
     constructor() {
     }
     getList(){
-    return this.users;
+        return this.users;
     } 
     add(user){
         user.id = this.users
-        .map(u => u.id) //me devuleve un arreglo con los id de los usuarios
-        .reduce((a, b) => Math.max(a, b), 0) + 1; //me toma un valor primero y luego lo compara con el valor actual, y devuleve el mayor
+            .map(u => u.id) //me devuleve un arreglo con los id de los usuarios
+            .reduce((a, b) => Math.max(a, b), 0) + 1; //me toma un valor primero y luego lo compara con el valor actual, y devuleve el mayor
         this.users.push(user);
         return user;
     }

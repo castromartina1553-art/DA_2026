@@ -1,4 +1,5 @@
 import { getDependency } from '../dependency.js';
+import bcrypt from 'bcrypt';
 
 export class UserService {
     constructor(){
@@ -24,6 +25,8 @@ export class UserService {
         if (existentUser.length)
             throw new Error('El nombre de usuario ya existe');
 
+        user.password = await bcrypt.hash(user.password, 10);
+
         return this.userRepo.create(user);
     }
     deleteByName(name){
@@ -39,7 +42,7 @@ export class UserService {
 
         if (user.password == '1234')
             throw new Error('La contraseña no puede ser 1234');
-
+    
         return this.userRepo.updateByName(name,user);
     }   
 }
