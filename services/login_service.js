@@ -3,10 +3,11 @@ import bcrypt from 'bcrypt';
 
 export class loginService {
     constructor(){
-        this.userRepo = getDependency('userRepo');
-        this.sessionRepo = getDependency('sessionRepo');
+        this.UserService = getDependency('userService');
+        this.SessionService = getDependency('sessionService');
+        this.sessionRepo = getDependency('sessionRepo');   
     }
-
+     
     createToken(){
         const array = new Uint32Array(32);
         crypto.getRandomValues(array);
@@ -20,10 +21,8 @@ export class loginService {
         if (!data.password)
             throw new Error('La contraseña es obligatoria');
 
-        const user = await this.userRepo.findOne({
-            username: data.username
-        });  
-
+        const user = await this.UserService.getByUsername(data.username);
+    
         if (!user)
             throw new Error('Usuario o contraseña incorrectos');
 
@@ -37,17 +36,12 @@ export class loginService {
         var authorizationToken;
         do{ 
             authorizationToken = this.createToken();
-        } while (await this.sessionRepo.findOne({authoriizationToken}));
+        } while (await this.sessionRepo.findOne({authorizationToken}));
 
-        const session =  await this.sessionRepo.create({
-            username: user.username,
-            authoriizationToken,        
-            role: user.role,    
-            open: new Date().toISOString()
-        });
+        const session =  await this.SessionService.createForUser(user);
 
         return {
-            authorizationToken: session.authoriizationToken,
+            authorizationToken: session.authorizationToken,
             username: session.username,
             role: user.role
         };

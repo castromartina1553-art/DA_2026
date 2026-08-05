@@ -9,6 +9,6 @@ addDependency('userRepo', UserMongo);
 addDependency('sessionRepo', sessionMongo);
 
 addDependency('userService', new UserService());
-addDependency('loginService', new loginService());
 addDependency('sessionService', new SessionService());
+addDependency('loginService', new loginService());
 

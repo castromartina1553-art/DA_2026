@@ -5,7 +5,7 @@ export function configureLoginRouter(router) {
 
     router.post('/login', async (req, res) => {
         const data = req.body;
-        const session = await loginService.add(user);
-        res.json({ session });
+        const session = await loginService.login(data);
+        res.json(session);
     });
 }

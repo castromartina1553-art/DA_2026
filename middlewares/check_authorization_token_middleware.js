@@ -1,7 +1,7 @@
 import { getDependency } from '../dependency.js';
 
 export default async function checkAuthorizationTokenMiddleware(req, res, next) {
-    const authHeader = req.headers['autorization'];
+    const authHeader = req.headers['authorization'];
     if (authHeader) {
         const schema = authHeader.split(' ')[0];
         const token = authHeader.split(' ')[1];
@@ -17,7 +17,9 @@ export default async function checkAuthorizationTokenMiddleware(req, res, next) 
             throw new Error('Invalid authorization token');
 
         req.session = session;
-    }
 
-    next();
+        console.log(session);
+
+    }
+     next();
 }

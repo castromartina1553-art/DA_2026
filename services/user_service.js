@@ -8,6 +8,10 @@ export class UserService {
     async getList(){
         return await this.userRepo.find(); // el find es un metodo de mongoose que devuelve todos los documentos de la coleccion
     }
+
+    async getByUsername(username){
+        return await this.userRepo.findOne({username});
+    }
     
     async add(user){
         if (!user.username)
@@ -29,20 +33,21 @@ export class UserService {
 
         return this.userRepo.create(user);
     }
-    deleteByName(name){
-        const user = this.userRepo.getByName(name);
+    async deleteByName(name){
+        const user = await this.userRepo.findOne({username: name});
         if (!user)
             throw new Error('El usuario no existe');
-        this.userRepo.deleteByName(name);
+        await this.userRepo.deleteOne({username: name});
     }
-    updateByName(name, user){
-        const existentUser = this.userRepo.getByName(name);
-        if (!existentUser)
+    async updateByName(name, user){
+        const existentUser = await this.userRepo.findOne({username: name});
+        if (!existentUser){
             throw new Error('El usuario no existe');
-
-        if (user.password == '1234')
+        }
+        if (user.password == '1234'){
             throw new Error('La contraseña no puede ser 1234');
+        }
     
-        return this.userRepo.updateByName(name,user);
+        return this.userRepo.updateOne({username: name}, user);
     }   
 }
