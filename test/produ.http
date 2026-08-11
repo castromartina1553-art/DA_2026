@@ -1,0 +1,36 @@
+
+GET http://localhost:3000/api/products
+
+
+
+@authorizationToken = c800e4fc7ead29bd5698ee15b05509fc75f1a3818d029d395923ffa4987bc263
+###
+
+POST http://localhost:3000/api/products
+Content-Type: application/json
+Authorization: Bearer {{authorizationToken}}
+
+{
+    "produname": "Lampazo Mediano",
+    "precio": "18000",
+    "stock":"15"
+}
+
+
+###
+
+DELETE http://localhost:3000/api/products/Lampazo Mediano
+Authorization: Bearer {{authorizationToken}}
+
+###
+
+PATCH http://localhost:3000/api/products/Lampazo Mediano
+Authorization: Bearer {{authorizationToken}}
+Content-Type: application/json
+
+{
+    "produname": "Lampazo Mediano",
+    "precio": "20000",
+    "stock":"30"
+}
+

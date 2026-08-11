@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';//luego de descargar el mongoose, se importa con import
 import config from './config.js';
 import { configureRouter } from './api/router.js'; // server donde arranca el servidor
+import { configureProduRouter } from './api/produ_router.js'; // server donde arranca el servidor
 import './dependencies.js';
 import errorMiddleware from './middlewares/errors_middleware.js';
 import checkAuthorizationTokenMiddleware from './middlewares/check_authorization_token_middleware.js';
@@ -19,6 +20,7 @@ app.use(checkAuthorizationTokenMiddleware); //usa el middleware de check authori
 const apiRouter = express.Router();
 app.use('/api', apiRouter); //usa el router de api
 configureRouter(apiRouter); //configura el router de api
+configureProduRouter(apiRouter); //configura el router de productos
 
 app.use(errorMiddleware); //usa el middleware de errores
 

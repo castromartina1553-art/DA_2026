@@ -2,13 +2,13 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "username": "admi",
-    "password": "1234"
+    "username": "Isaias",
+    "password": "155306"
 }
 
 ###
 
-@authorizationToken = e3af01a5bba3f0d2fb8a6deabaaf9b3ee2dec5931a1a585a924c5c0ed147f7e6
+@authorizationToken = c800e4fc7ead29bd5698ee15b05509fc75f1a3818d029d395923ffa4987bc263
 GET http://localhost:3000/api/users
 Authorization: Bearer {{authorizationToken}}
 
@@ -19,24 +19,23 @@ Authorization: Bearer {{authorizationToken}}
 Content-Type: application/json
 
 {
-    "username": "Martina",
-    "password": "200653",
-    "displayName": "Martina Castro",
-    "email": "martina@gmail.com",
-    "role": "admin"
+    "username": "Isaias",
+    "password": "155306",
+    "displayName": "Isa",
+    "email": "isa@gmail.com"
 }
 
 ###
 
-DELETE http://localhost:3000/api/users/Martina
+DELETE http://localhost:3000/api/users/Isaias
 Authorization: Bearer {{authorizationToken}}
 
 ###
 
-PATCH http://localhost:3000/api/users/Juan
+PATCH http://localhost:3000/api/users/Pedro
 Authorization: Bearer {{authorizationToken}}
 Content-Type: application/json
 
 {
-    "username": "Pedro"
+    "username": "Juan"
 }
